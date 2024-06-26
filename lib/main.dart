@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gdsc/core/utils/api_service.dart';
 
 import 'core/utils/go_router.dart';
+import 'core/utils/service_locator.dart';
+import 'features/home/data/repo/home_repo_impl.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
+  final repo = HomeRepoImpl(getIt<ApiService>());
+  var data = await repo.getNewReleases();
+  data.fold(
+    (l) => print(l.errorMessage),
+    (r) => print(r[0].toJson()),
+  );
   runApp(const MyApp());
 }
 
