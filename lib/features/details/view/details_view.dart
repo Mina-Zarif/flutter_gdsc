@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gdsc/features/details/view/widgets/details_body.dart';
 
 class DetailsView extends StatelessWidget {
   const DetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Details View"),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Dora and the lost city of gold"),
       ),
+      body: const DetailsBodyView(),
     );
   }
 }

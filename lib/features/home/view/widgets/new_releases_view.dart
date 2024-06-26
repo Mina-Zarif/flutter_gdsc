@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gdsc/constants.dart';
+import 'package:flutter_gdsc/core/utils/go_router.dart';
 
 import '../../../../core/utils/app_assets.dart';
 
@@ -24,8 +25,11 @@ class NewReleasesView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Image.asset(
-                AppAssets.movieImage,
+              itemBuilder: (context, index) => InkWell(
+                onTap: () => AppRouter.router.push(AppRouter.details),
+                child: Image.asset(
+                  AppAssets.movieImage,
+                ),
               ),
               separatorBuilder: (context, index) => const SizedBox(
                 width: 15,

@@ -31,6 +31,7 @@ class _AppViewState extends State<AppView> {
         currentIndex: currentIndex,
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.amber,
+        backgroundColor: const Color(0xff1a1a1a),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

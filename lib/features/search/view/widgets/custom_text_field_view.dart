@@ -15,7 +15,14 @@ class CustomTextFieldView extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
         ),
-        labelText: 'Search',
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        ),
+        hoverColor: Colors.white,
+        focusColor: Colors.white,
+        hintText: 'Search...',
+        hintStyle: TextStyle(color: Colors.white),
       ),
     );
   }
