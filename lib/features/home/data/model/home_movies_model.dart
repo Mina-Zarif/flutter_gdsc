@@ -5,6 +5,7 @@ class HomeMoviesModel {
   final String? title;
   final String? overview;
   final double? voteAverage;
+  final String? posterPath;
 
   HomeMoviesModel({
     this.id,
@@ -13,6 +14,7 @@ class HomeMoviesModel {
     this.title,
     this.overview,
     this.voteAverage,
+    this.posterPath,
   });
 
   factory HomeMoviesModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class HomeMoviesModel {
       title: json['title'],
       overview: json['overview'],
       voteAverage: json['vote_average'],
+      posterPath: json['poster_path'],
     );
   }
 
@@ -33,5 +36,6 @@ class HomeMoviesModel {
         'title': title,
         'overview': overview,
         'vote_average': voteAverage,
+        'poster_path': posterPath,
       };
 }

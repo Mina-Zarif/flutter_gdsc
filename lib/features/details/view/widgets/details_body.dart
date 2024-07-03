@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gdsc/constants.dart';
+import 'package:flutter_gdsc/features/details/data/model/details_movie_model.dart';
 
-import '../../../../core/utils/app_assets.dart';
-import '../../../home/view/widgets/titled_movies_view.dart';
 import 'movie_details_view.dart';
 
 class DetailsBodyView extends StatelessWidget {
-  const DetailsBodyView({super.key});
+  const DetailsBodyView({super.key, required this.movie});
+
+  final DetailsMovieModel movie;
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,13 @@ class DetailsBodyView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(AppAssets.movieCover),
+          Image.network(imgUrl + movie.backdropPath),
           const SizedBox(height: 15),
-          const MovieDetailsView(),
+          MovieDetailsView(movie: movie),
           const SizedBox(height: 15),
-          const TiltedMoviesView(
-            title: "More Like This",
-          ),
+          // const TiltedMoviesView(
+          //   title: "More Like This",
+          // ),
         ],
       ),
     );

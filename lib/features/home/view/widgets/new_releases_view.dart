@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gdsc/constants.dart';
 import 'package:flutter_gdsc/core/utils/go_router.dart';
 
-import '../../../../core/utils/app_assets.dart';
+import '../../data/model/home_movies_model.dart';
 
 class NewReleasesView extends StatelessWidget {
-  const NewReleasesView({super.key});
+  const NewReleasesView({super.key, required this.movies});
+
+  final List<HomeMoviesModel> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +28,24 @@ class NewReleasesView extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => InkWell(
-                onTap: () => AppRouter.router.push(AppRouter.details),
-                child: Image.asset(
-                  AppAssets.movieImage,
+                onTap: () => AppRouter.router.push(
+                  AppRouter.details,
+                  extra: {
+                    'id': movies[index].id,
+                    'title': movies[index].title,
+                  },
+                ),
+                child: Image.network(
+                  '$imgUrl${movies[index].posterPath!}',
+                  fit: BoxFit.fill,
+                  width: 140,
+                  height: 200,
                 ),
               ),
               separatorBuilder: (context, index) => const SizedBox(
                 width: 15,
               ),
-              itemCount: 8,
+              itemCount: movies.length,
             ),
           ),
           const SizedBox(height: 13)

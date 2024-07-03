@@ -47,11 +47,6 @@ class ApiService {
     String? token,
     String? refreshToken,
   }) async {
-    // _dio.options.headers = {
-    //   "Content-Type": "application/json",
-    //   'Authorization': 'Bearer $token',
-    //   // 'x-refresh-token': refreshToken,
-    // };
     var response = await _dio.get(
       endpoint,
       queryParameters: query ?? {},

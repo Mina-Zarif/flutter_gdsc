@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gdsc/constants.dart';
 import 'package:flutter_gdsc/core/utils/go_router.dart';
 
-import '../../../../core/utils/app_assets.dart';
+import '../../data/model/home_movies_model.dart';
 
 class TiltedMoviesView extends StatelessWidget {
-  const TiltedMoviesView({super.key, required this.title});
+  const TiltedMoviesView({
+    super.key,
+    required this.title,
+    required this.movies,
+  });
 
+  final List<HomeMoviesModel> movies;
   final String title;
 
   @override
@@ -27,7 +32,9 @@ class TiltedMoviesView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => const TitledMoviesView(),
+              itemBuilder: (context, index) => TitledMoviesView(
+                moviesModel: movies[index],
+              ),
               separatorBuilder: (context, index) => const SizedBox(
                 width: 15,
               ),
@@ -42,7 +49,9 @@ class TiltedMoviesView extends StatelessWidget {
 }
 
 class TitledMoviesView extends StatelessWidget {
-  const TitledMoviesView({super.key});
+  const TitledMoviesView({super.key, required this.moviesModel});
+
+  final HomeMoviesModel moviesModel;
 
   @override
   Widget build(BuildContext context) {
@@ -56,30 +65,27 @@ class TitledMoviesView extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Image.asset(
-                  AppAssets.movieImage,
-                  fit: BoxFit.fitWidth,
-                ),
+                child: Image.network(imgUrl + moviesModel.posterPath!),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.only(start: 8),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
-                        Icon(Icons.star, color: Colors.amber),
-                        Text("7.7"),
+                        const Icon(Icons.star, color: Colors.amber),
+                        Text(moviesModel.voteAverage!.toStringAsFixed(1)),
                       ],
                     ),
                     Text(
-                      "Dora and the lost city of gold",
+                      moviesModel.title!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text("2018  2h 7m"),
-                    SizedBox(height: 10),
+                    const Text("2018  2h 7m"),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),

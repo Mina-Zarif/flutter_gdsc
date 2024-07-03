@@ -21,7 +21,13 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: details,
-        builder: (context, state) => const DetailsView(),
+        builder: (context, state) {
+          Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
+          return DetailsView(
+            movieId: extra['id'] as int,
+            movieTitle: extra['title'] as String,
+          );
+        },
       )
     ],
   );

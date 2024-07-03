@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/app_assets.dart';
+import 'package:flutter_gdsc/constants.dart';
+import 'package:flutter_gdsc/features/details/data/model/details_movie_model.dart';
 
 class MovieDetailsView extends StatelessWidget {
-  const MovieDetailsView({super.key});
+  const MovieDetailsView({super.key, required this.movie});
+
+  final DetailsMovieModel movie;
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +14,19 @@ class MovieDetailsView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Dora and the lost city of gold",
-            style: TextStyle(
+          Text(
+            movie.title,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
-          const Text("2019  PG-13  2h 7m"),
+          Text(movie.releaseDate),
+          // intl package
           const SizedBox(height: 20),
           Row(
             children: [
-              Image.asset(AppAssets.movieImage),
+              Image.network(imgUrl + movie.posterPath, height: 250),
               const SizedBox(width: 15),
               Expanded(
                 child: Column(
@@ -31,29 +34,38 @@ class MovieDetailsView extends StatelessWidget {
                   children: [
                     Container(
                       height: 30,
-                      width: 70,
+                      width: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey.shade600),
                         color: Colors.transparent,
                       ),
-                      child: const Center(child: Text("Action")),
+                      child: Center(
+                        child: Text(
+                          movie.originalLanguage,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                        "Having spent most of her life exploring the jungle, nothing could prepare Dora for her most dangerous adventure yet — high school. "),
+                    Text(
+                      movie.overview,
+                    ),
                     const SizedBox(height: 10),
-                    const Row(
+                    Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.star,
                           color: Colors.amber,
                           size: 20,
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Text(
-                          "7.7",
-                          style: TextStyle(fontSize: 15),
+                          movie.voteAverage.toStringAsFixed(2),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
